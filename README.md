@@ -1,4 +1,4 @@
-# HangManHackathon
+# SnowManHackathon
 
 * First build this project in the terminal
 * Then attach it to the DOM
