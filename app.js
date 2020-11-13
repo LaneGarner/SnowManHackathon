@@ -1,217 +1,155 @@
-const readline = require("readline");
-const gretaString = "My message is that we'll be watching you. This is all wrong. I shouldn't be up here. I should be back in school on the other side of the ocean. Yet you all come to us young people for hope. How dare you! You have stolen my dreams and my childhood with your empty words. And yet I'm one of the lucky ones. People are suffering. People are dying. Entire ecosystems are collapsing. We are in the beginning of a mass extinction, and all you can talk about is money and fairy tales of eternal economic growth. How dare you! For more than 30 years, the science has been crystal clear. How dare you continue to look away and come here saying that you're doing enough, when the politics and solutions needed are still nowhere in sight. You say you hear us and that you understand the urgency. But no matter how sad and angry I am, I do not want to believe that. Because if you really understood the situation and still kept on failing to act, then you would be evil. And that I refuse to believe. The popular idea of cutting our emissions in half in 10 years only gives us a 50% chance of staying below 1.5 degrees [Celsius], and the risk of setting off irreversible chain reactions beyond human control. Fifty percent may be acceptable to you. But those numbers do not include tipping points, most feedback loops, additional warming hidden by toxic air pollution or the aspects of equity and climate justice. They also rely on my generation sucking hundreds of billions of tons of your CO2 out of the air with technologies that barely exist. So a 50% risk is simply not acceptable to us — we who have to live with the consequences. To have a 67% chance of staying below a 1.5 degrees global temperature rise – the best odds given by the [Intergovernmental Panel on Climate Change] – the world had 420 gigatons of CO2 left to emit back on Jan. 1st, 2018. Today that figure is already down to less than 350 gigatons. How dare you pretend that this can be solved with just 'business as usual' and some technical solutions? With today's emissions levels, that remaining CO2 budget will be entirely gone within less than 8 1/2 years. There will not be any solutions or plans presented in line with these figures here today, because these numbers are too uncomfortable. And you are still not mature enough to tell it like it is. You are failing us. But the young people are starting to understand your betrayal. The eyes of all future generations are upon you. And if you choose to fail us, I say: We will never forgive you. We will not let you get away with this. Right here, right now is where we draw the line. The world is waking up. And change is coming, whether you like it or not. Thank you."
-let word, remainingBlankLetters, guessCount, answerArray = [];
+let word, remainingBlankLetters, guessCount, wrongGuesses, correctGuesses, winCount = 0, loseCount = 0, answerArray = [];
+const xmasString = "On the first second third fourth fifth sixth seventh eighth ninth tenth eleventh twelfth day of Christmas my true love sent to me: Twelve Drummers Drumming, Eleven Pipers Piping, Ten Lords a Leaping, Nine Ladies Dancing, Eight Maids a Milking, Seven Swans a Swimming, Six Geese a Laying, Seven Golden Rings, Four Calling Birds, Three French Hens, Two Turtle Doves, and a Partridge in a Pear Tree!"
+
+let wrongGuessRegex = />/
+let correctGuessRegex = />/
 
 const randomWordFromStr = (string) => {
-    const punc = /[0123456789!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
-    let words = string.toLowerCase().replace(punc, '').split(' ');
+    const notLetter = /[0123456789!#%',.:?]/g;
+    let words = string.toLowerCase().replace(notLetter, '').split(' ');
     return words[Math.floor(Math.random() * words.length)]
 }
 
 const createWord = () => {
-    word = randomWordFromStr(gretaString).split('')
+    word = randomWordFromStr(xmasString).split('')
     answerArray = word.map(index => index = "_")
-    guessCount = 0;
+    guessCount = 0
     remainingBlankLetters = word.length
+    console.log(word.join(''))
     return word
 }
 
 const buildPage = () => {
     createWord()
-    console.log(word)
-    document.getElementById('wordDiv').innerHTML = 'hello'
+    const wordDiv = document.querySelector('#wordDiv')
+    wordDiv.innerHTML = ''
+    wordDiv.appendChild(document.createTextNode(`${answerArray.join(' ')}`))
+    document.querySelector('#guess-count').innerHTML = `${12 - guessCount}`
+    document.querySelector('#Ellipse_1').style.visibility = 'hidden'
+    document.querySelector('#Ellipse_3').style.visibility = 'hidden'
+    document.querySelector("#Ellipse_2").style.visibility = 'hidden'
+    document.querySelector("#Group_2").style.visibility = 'hidden'
+    document.querySelector("#Group_4").style.visibility = 'hidden'
+    document.querySelector("#Ellipse_11").style.visibility = 'hidden'
+    document.querySelector("#Ellipse_13").style.visibility = 'hidden'
+    document.querySelector("#Ellipse_12").style.visibility = 'hidden'
+    document.querySelector("#Ellipse_4").style.visibility = 'hidden'
+    document.querySelector("#Ellipse_5").style.visibility = 'hidden'
+    document.querySelector("#Group_5").style.visibility = 'hidden'
+    document.querySelector("#Polygon_1").style.visibility = 'hidden'
+    document.querySelector("#Path_1").style.visibility = 'hidden'
+    document.querySelector("#Group_6").style.visibility = 'hidden'
+    document.querySelector('#wrong').innerHTML = ''
+    document.querySelector('#user-guess').readOnly = false
+    document.querySelector('#user-guess').focus()
 }
 
 buildPage()
 
-// const startGame = () => {
-//     console.log('Initializing new game...')
-//     createWord()
-//     setTimeout(function(){
-//     console.log('New game!')
-//             //USE THIS TO CHEAT:
-//             console.log('answer: ', word.join(''))
-//     console.log(answerArray.join(' '))
-//     getPrompt()
-//     }, 2000)
-// }
+const resetGame = () => {
+    if (confirm("Are you sure? Resetting the game will count as a loss")){
+        loseCount++
+        document.querySelector('#lose-count').innerHTML += `${loseCount}`
+        buildPage()
+    }
+    // console.log(confirm)
+}
+
+
+
 
 const checkGuess = (guess) => {
-    if(!checkForEnd()){
-        if(guess.length !==1){
-            console.log('Please return a single letter...')
-        } else{
-            let currentRemainingLetters = remainingBlankLetters
-            for(let i = 0; i < word.length; i ++) {
-                if(word[i] === guess) {
-                    answerArray[i] = guess
-                    remainingBlankLetters --
-                }
-            }
-            if(currentRemainingLetters === remainingBlankLetters) {
-                guessCount++
+    if (guess.length !== 1 || /[A-Za-z]/.test(guess) === false) {
+        alert('Please enter a single letter')
+    } else if (wrongGuessRegex.test(guess) === true || correctGuessRegex.test(guess) === true) {
+        alert('Please enter a new letter')
+    } else {
+        let currentRemainingLetters = remainingBlankLetters
+        for(let i = 0; i < word.length; i ++) {
+            if(word[i] === guess) {
+                answerArray[i] = guess
+                remainingBlankLetters --
             }
         }
-    } 
+        if(currentRemainingLetters === remainingBlankLetters) {
+            guessCount++
+            document.querySelector('#wrong').innerHTML += ` ${guess} `
+            if(guessCount === 1){
+                document.querySelector('#Ellipse_1').style.visibility = 'visible'
+            } else if (guessCount === 2){
+                document.querySelector('#Ellipse_3').style.visibility = 'visible'
+            } else if (guessCount === 3){
+                document.querySelector('#Ellipse_2').style.visibility = 'visible'
+            } else if (guessCount === 4){
+                document.querySelector('#Group_2').style.visibility = 'visible'
+            } else if (guessCount === 5){
+                document.querySelector('#Group_4').style.visibility = 'visible'
+            } else if (guessCount === 6){
+                document.querySelector('#Ellipse_11').style.visibility = 'visible'
+                document.querySelector('#Ellipse_12').style.visibility = 'visible'
+                document.querySelector('#Ellipse_13').style.visibility = 'visible'
+            } else if (guessCount === 7){
+                document.querySelector('#Ellipse_4').style.visibility = 'visible'
+            } else if (guessCount === 8){
+                document.querySelector('#Ellipse_5').style.visibility = 'visible'
+            } else if (guessCount === 9){
+                document.querySelector('#Group_5').style.visibility = 'visible'
+            } else if (guessCount === 10){
+                document.querySelector('#Polygon_1').style.visibility = 'visible'
+            } else if (guessCount === 11){
+                document.querySelector('#Path_1').style.visibility = 'visible'
+            } else if (guessCount === 12){
+                document.querySelector('#Group_6').style.visibility = 'visible'
+            } 
+        }
+        }
+        document.querySelector('#user-guess').value = ''
 }
 
 const checkForEnd = () => {
-    if(remainingBlankLetters === 0){
-        console.clear()
-        console.log(`You win! The answer was "${word.join('')}"`)
-        startGame()
-        return true
-    } else if (guessCount === 7) {
-        console.clear()
-        console.log(`You lose! The answer was "${word.join('')}"`)
-        startGame()
-        return true
+    wrongGuesses = document.getElementById('wrong').textContent.split(" ").join("")
+    // console.log('wrongGuesses in checkForEnd', wrongGuesses)
+    wrongGuessRegex = new RegExp(`[${wrongGuesses}]`);
+    // console.log('wrongGuessRegex in checkForEnd', wrongGuessRegex)
+    
+    correctGuesses = answerArray.join()
+    console.log('correctGuesses in checkForEnd', correctGuesses)
+    correctGuessRegex = new RegExp(`[${correctGuesses}]`);
+    console.log('correctGuessRegex in checkForEnd', correctGuessRegex)
+
+    if(answerArray.join() === word.join()){
+        // const wordDiv = document.querySelector('#wordDiv')
+        // wordDiv.appendChild(document.createTextNode(`You win! The correct answer was${word.join('')}`))
+        document.querySelector('#user-guess').readOnly = true
+        setTimeout(()=>{
+            alert(`You win! The answer was "${word.join('')}"`)
+            buildPage()
+        })
+        winCount++
+        document.querySelector('#win-count').innerHTML += `${winCount}`
+        // startGame()
+        // return true
+    } else if (guessCount === 12) {
+        document.querySelector('#user-guess').readOnly = true
+        setTimeout(()=>{
+            alert(`You lose! The answer was "${word.join('')}"`)
+            buildPage()
+        }, 500)
+        loseCount++
+        document.querySelector('#lose-count').innerHTML += `${loseCount}`
+        // startGame()
+        // return true
     }
 }
 
 const snowMan = (guess) => {
+    guess = document.querySelector('#user-guess').value.toLowerCase()
     checkGuess(guess)
-    console.log('remaining guesses: ', (7 - guessCount))
-    console.log(answerArray.join(' '))
+    document.querySelector('#guess-count').innerHTML = `${12 - guessCount}`
+    const wordDiv = document.querySelector('#wordDiv')
+    wordDiv.innerHTML = ''
+    wordDiv.appendChild(document.createTextNode(`${answerArray.join(' ')}`))
+    // console.log(word.join(''))
+    // console.log(answerArray.join(''))
+    checkForEnd()
 }
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-const getPrompt = () =>  {  
-    rl.question('guess: ', (guess) => {   
-        snowMan(guess);
-        if(!checkForEnd()){
-            getPrompt();  
-        }
-     });
-}
-
-startGame()
-
-
-// ---------------------------------------------------
-// let word, remainingBlankLetters, guessCount;
-// let answerArray = []
-
-// const gretaString = "My message is that we'll be watching you. This is all wrong. I shouldn't be up here. I should be back in school on the other side of the ocean. Yet you all come to us young people for hope. How dare you! You have stolen my dreams and my childhood with your empty words. And yet I'm one of the lucky ones. People are suffering. People are dying. Entire ecosystems are collapsing. We are in the beginning of a mass extinction, and all you can talk about is money and fairy tales of eternal economic growth. How dare you! For more than 30 years, the science has been crystal clear. How dare you continue to look away and come here saying that you're doing enough, when the politics and solutions needed are still nowhere in sight. You say you hear us and that you understand the urgency. But no matter how sad and angry I am, I do not want to believe that. Because if you really understood the situation and still kept on failing to act, then you would be evil. And that I refuse to believe. The popular idea of cutting our emissions in half in 10 years only gives us a 50% chance of staying below 1.5 degrees [Celsius], and the risk of setting off irreversible chain reactions beyond human control. Fifty percent may be acceptable to you. But those numbers do not include tipping points, most feedback loops, additional warming hidden by toxic air pollution or the aspects of equity and climate justice. They also rely on my generation sucking hundreds of billions of tons of your CO2 out of the air with technologies that barely exist. So a 50% risk is simply not acceptable to us — we who have to live with the consequences. To have a 67% chance of staying below a 1.5 degrees global temperature rise – the best odds given by the [Intergovernmental Panel on Climate Change] – the world had 420 gigatons of CO2 left to emit back on Jan. 1st, 2018. Today that figure is already down to less than 350 gigatons. How dare you pretend that this can be solved with just 'business as usual' and some technical solutions? With today's emissions levels, that remaining CO2 budget will be entirely gone within less than 8 1/2 years. There will not be any solutions or plans presented in line with these figures here today, because these numbers are too uncomfortable. And you are still not mature enough to tell it like it is. You are failing us. But the young people are starting to understand your betrayal. The eyes of all future generations are upon you. And if you choose to fail us, I say: We will never forgive you. We will not let you get away with this. Right here, right now is where we draw the line. The world is waking up. And change is coming, whether you like it or not. Thank you."
-
-//remove puncuation & make lowercase
-//split string into array 
-//pull random word from array
-//split word into array of letters
-
-
-// const randomWordFromStr = (string) => {
-//     const punc = /[0123456789!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
-//     let words = string.toLowerCase().replace(punc, '').split(' ');
-//     return words[Math.floor(Math.random() * words.length)]
-// }
-
-// const createWord = () => {
-//     word = randomWordFromStr(gretaString).split('')
-//     answerArray = word.map(index => index = "_")
-//     guessCount = 0;
-//     remainingBlankLetters = word.length
-//     return word
-// }
-
-
-
-console.log(word)
-console.log('remaining blank letters: ', remainingBlankLetters)
-
-
-const checkGuess = (guess) => {
-    guess = document.getElementById('user-guess').value
-    let currentRemainingLetters = remainingBlankLetters
-    for(let i = 0; i < word.length; i ++) {
-        if(word[i] === guess) {
-            answerArray[i] = guess
-            remainingBlankLetters --
-            console.log(answerArray)
-            console.log(remainingBlankLetters)
-        }
-    }
-    if(currentRemainingLetters === remainingBlankLetters) {
-        guessCount++
-    }
-    // return guessCount
-}
-
-// console.log('guesses: ', guessCount)
-
-const checkForWin = () => {
-    if(remainingBlankLetters === 0){
-        console.log('You win')
-        return 'You win'
-    } else if (guessCount === 7) {
-        console.log('You lose')
-        return 'You lose'
-    }
-    //if remaining letters = 0 win
-    // else if guess count = 7 then loss
-}
-
-const snowMan = () => {
-    // guess = document.getElementById('user-guess').value
-    // console.log(guess)
-    // createWord()
-    checkGuess()
-    checkForWin()
-    console.log('guesses: ', guessCount)
-
-}
-
-
-
-
-// wordArr.forEach(let => answerArray[let] = '_')
-
-
-
-
-
-
-
-// while((remainingBlankLetters > 0) && (guessCount <= 7)){
-    
-//     alert(`Word: ${answerArray.join(' ')}`)
-    
-//     let guess = prompt('Guess a letter')
-
-//     if(guess.length !== 1) {
-//         alert('Please enter a single letter...')
-//     } else if (guessCount.length !== 7)  {
-//         for (let j=0; j<word.length; j++){
-//             if (word[j] === guess){
-//                 answerArray[j] = guess
-//                 remainingBlankLetters--
-//             } 
-            
-//         }
-//     } else {
-//         guessCount++
-//     }
-//     console.log(guessCount)
-// }
-
-
-
-
-
-
-        // }
-   
-
-        // {
-        //     alert('You dead')
-        //     remainingBlankLetters = 0
-        // } else if
-
-
-
-    // alert('Nice work, you win!')
-

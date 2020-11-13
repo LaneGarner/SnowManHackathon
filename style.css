@@ -1,0 +1,123 @@
+* {
+    font-family: sans-serif;
+}
+
+header {
+    text-align: center;
+    /* color: #333; */
+    font-weight: 100;
+    font-size: 50px;
+    /* text-decoration: underline dotted; */
+    border-bottom: dotted 10px #333;
+    margin: 20px auto 30px auto;
+    padding-bottom: 20px;
+    /* margin-bottom: 30px; */
+}
+
+header span:nth-of-type(odd) {
+    color:#2ECC40
+}
+
+header span:nth-of-type(even) {
+    color: tomato;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    /* flex-direction: column; */
+    align-items: flex-start;
+}
+
+#left, form, #wordDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#left {
+    padding-top: 30px;
+}
+
+#right p {
+    text-align: center;
+    font-style: italic;
+    color: #2ECC40;
+    border: solid 2px #2ECC40;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+svg {
+    width: 250px;
+    height: auto;
+    padding: 20px;
+    margin: auto 50px;
+    border: solid 3px #333;
+    border-radius: 9px;
+    /* visibility: hidden; */
+}
+
+/* #Ellipse_1, #Ellipse_3, #Ellipse_2, #Group_2, #Group_4, #Ellipse_11, #Ellipse_13, #Ellipse_12, #Ellipse_4, #Ellipse_5, #Group_5, #Polygon_1, #Path_1, #Group_6 {
+    visibility: hidden;
+} */
+
+#wordDiv {
+    font-size: 60px;
+    font-weight: 100;
+    margin-bottom: 40px;
+}
+
+input {
+    font-size: 30px;
+    border-radius: 8px;
+    width: 50px;
+    text-align: center;
+    margin-top: 5px;
+    outline: none;
+    border: none;
+    padding: 8px;
+    background: #333;
+    color: white;
+}
+
+button {
+    outline-color: #333;
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+}
+
+form {
+    font-size: 20px;
+}
+
+#wrong {
+    color: tomato;
+    font-size: 30px;
+}
+
+#win-count, #lose-count {
+    border: solid 2px #2ECC40;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 10px;
+    width: 100px;
+}
+
+#win-count {
+    color: #2ECC40;
+    border: solid 2px #2ECC40;
+
+}
+
+#lose-count {
+    color: tomato;
+    border: solid 2px tomato;
+    /* border-radius: 8px; */
+    /* padding: 8px; */
+}

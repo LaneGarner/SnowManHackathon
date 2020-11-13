@@ -3,15 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="app.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" async></script>
+    <title>Snowman</title>
 </head>
 <body>
-    <div id="wordDiv"></div>
-    <form onsubmit="return false">
-        <label for="user-guess">Guess a letter:</label>
-        <input type="text" id="user-guess">
-        <button onclick="snowMan()">Submit</button>
-    </form>
+    <header>
+        <!-- <h1 id="snow-person">Snowperson</h1> -->
+        <span>S</span><span>n</span><span>o</span><span>w</span><span>p</span><span>e</span><span>r</span><span>s</span><span>o</span><span>n</span>
+    </header>
+    <main>
+        <div id="left">
+            <form onsubmit="return false" autocomplete="off">
+                <label for="user-guess">Guess a letter:</label>
+                <input type="text" id="user-guess" pattern="[A-Za-z]" maxlength="1" autofocus require><br>
+                <!-- <input type="text" id="user-guess" autofocus require><br> -->
+                <div>
+                    <button type="submit" onclick="snowMan()">Submit</button>
+                    <button type="reset" onclick="resetGame()">Reset</button>
+                </div>
+            </form>
+            <div id="wordDiv"></div>
+            <div id="wrong"></div>
+            <div>
+                <div id="win-count">Wins: </div>
+                <div id="lose-count">Losses: </div>
+            </div>
+        </div>
+        <div id= "right">
+            <svg viewBox="0 0 521.091 845.184">
+                <g id="Group_7" data-name="Group 7" transform="translate(-91.733 -97.773)">
+                    <g id="Group_2" data-name="Group 2" transform="translate(92.5 397.021)">
+                    <line id="Line_1" data-name="Line 1" x1="105.734" y1="68.541" transform="translate(27.629 28.692)" fill="none" stroke="#8b4513" stroke-width="9"/>
+                    <line id="Line_2" data-name="Line 2" y1="4.782" x2="27.629" transform="translate(0 28.692)" fill="none" stroke="#8b4513" stroke-width="9"/>
+                    <line id="Line_3" data-name="Line 3" x1="21.253" y1="28.692" transform="translate(6.376)" fill="none" stroke="#8b4513" stroke-width="9"/>
+                    </g>
+                    <g id="Group_4" data-name="Group 4" transform="translate(466.022 442.714)">
+                    <line id="Line_4" data-name="Line 4" y1="32.942" x2="126.455" transform="translate(0 22.847)" fill="none" stroke="#8b4513" stroke-width="9"/>
+                    <line id="Line_5" data-name="Line 5" x1="11.689" y2="22.847" transform="translate(126.455)" fill="none" stroke="#8b4513" stroke-width="9"/>
+                    <line id="Line_6" data-name="Line 6" x1="18.065" y1="10.627" transform="translate(126.455 22.847)" fill="none" stroke="#8b4513" stroke-width="9"/>
+                    </g>
+                    <g id="Ellipse_2" data-name="Ellipse 2" transform="translate(171.042 572.957)" fill="#fff" stroke="#707070" stroke-width="5">
+                    <circle cx="185" cy="185" r="185" stroke="none"/>
+                    <circle cx="185" cy="185" r="182.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_3" data-name="Ellipse 3" transform="translate(211.042 405.957)" fill="#fff" stroke="#707070" stroke-width="5">
+                    <circle cx="145" cy="145" r="145" stroke="none"/>
+                    <circle cx="145" cy="145" r="142.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(234.042 193.957)" fill="#fff" stroke="#707070" stroke-width="5">
+                    <ellipse cx="121.5" cy="122" rx="121.5" ry="122" stroke="none"/>
+                    <ellipse cx="121.5" cy="122" rx="119" ry="119.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_4" data-name="Ellipse 4" transform="translate(302.042 260.957)" fill="#707070" stroke="#707070" stroke-width="1">
+                    <circle cx="13" cy="13" r="13" stroke="none"/>
+                    <circle cx="13" cy="13" r="12.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_5" data-name="Ellipse 5" transform="translate(384.042 260.957)" fill="#707070" stroke="#707070" stroke-width="1">
+                    <circle cx="13" cy="13" r="13" stroke="none"/>
+                    <circle cx="13" cy="13" r="12.5" fill="none"/>
+                    </g>
+                    <g id="Group_5" data-name="Group 5" transform="translate(288.293 348.404)">
+                    <g id="Ellipse_6" data-name="Ellipse 6" transform="translate(27.749 20.553)" fill="#707070" stroke="#707070" stroke-width="1">
+                        <ellipse cx="11.5" cy="11" rx="11.5" ry="11" stroke="none"/>
+                        <ellipse cx="11.5" cy="11" rx="11" ry="10.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_7" data-name="Ellipse 7" transform="translate(-0.251 -0.447)" fill="#707070" stroke="#707070" stroke-width="1">
+                        <ellipse cx="11.5" cy="11" rx="11.5" ry="11" stroke="none"/>
+                        <ellipse cx="11.5" cy="11" rx="11" ry="10.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_8" data-name="Ellipse 8" transform="translate(61.749 31.553)" fill="#707070" stroke="#707070" stroke-width="1">
+                        <circle cx="11" cy="11" r="11" stroke="none"/>
+                        <circle cx="11" cy="11" r="10.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_9" data-name="Ellipse 9" transform="translate(129.749 -0.447)" fill="#707070" stroke="#707070" stroke-width="1">
+                        <ellipse cx="11.5" cy="11" rx="11.5" ry="11" stroke="none"/>
+                        <ellipse cx="11.5" cy="11" rx="11" ry="10.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_10" data-name="Ellipse 10" transform="translate(99.749 20.553)" fill="#707070" stroke="#707070" stroke-width="1">
+                        <circle cx="11" cy="11" r="11" stroke="none"/>
+                        <circle cx="11" cy="11" r="10.5" fill="none"/>
+                    </g>
+                    </g>
+                    <path id="Polygon_1" data-name="Polygon 1" d="M18.065,0,36.13,60.04H0Z" transform="matrix(-0.259, 0.966, -0.966, -0.259, 410.429, 317.374)" fill="#edbf24"/>
+                    <g id="Ellipse_11" data-name="Ellipse 11" transform="translate(343.042 485.957)" fill="#707070" stroke="#707070" stroke-width="1">
+                    <circle cx="13" cy="13" r="13" stroke="none"/>
+                    <circle cx="13" cy="13" r="12.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_12" data-name="Ellipse 12" transform="translate(343.042 599.957)" fill="#707070" stroke="#707070" stroke-width="1">
+                    <circle cx="13" cy="13" r="13" stroke="none"/>
+                    <circle cx="13" cy="13" r="12.5" fill="none"/>
+                    </g>
+                    <g id="Ellipse_13" data-name="Ellipse 13" transform="translate(343.042 540.957)" fill="#707070" stroke="#707070" stroke-width="1">
+                    <circle cx="13" cy="13" r="13" stroke="none"/>
+                    <circle cx="13" cy="13" r="12.5" fill="none"/>
+                    </g>
+                    <path id="Path_1" data-name="Path 1" d="M865.75-794.788l213.273-32.187v-16.18l-41.875,6.563V-943.68L886.787-930.064l6.229,111.777L865.75-814.41Z" transform="translate(-625.94 1042)" fill="#707070" stroke="#707070" stroke-width="1"/>
+                    <g id="Group_6" data-name="Group 6" transform="translate(220.591 405.513)">
+                    <path id="Path_2" data-name="Path 2" d="M930.092-325.392l154.01-15.4-5.953-24.723L930.092-346.742l-11.8,11.985v9.365Z" transform="translate(-871.156 365.516)" fill="#d95252" stroke="#707070" stroke-width="1"/>
+                    <path id="Path_4" data-name="Path 4" d="M882.556-294.894l-52.978,95.979,23.84,10.137,44.105-111.664Z" transform="translate(-829.578 335.018)" fill="#d95252" stroke="#707070" stroke-width="1"/>
+                    <path id="Path_5" data-name="Path 5" d="M954.491-300.443h13.3l12.268,104.87H942.578Z" transform="translate(-882.538 335.018)" fill="#d95252" stroke="#707070" stroke-width="1"/>
+                    <path id="Path_3" data-name="Path 3" d="M940.5-340.849h23.863l3.717,28.9H940.5Z" transform="translate(-881.564 353.955)" fill="#dd4747" stroke="#707070" stroke-width="1"/>
+                    </g>
+                </g>
+            </svg>
+            <p>Remaining guesses: <span id="guess-count"></span></p>
+        </div>
+    </main>
 </body>
 </html>
