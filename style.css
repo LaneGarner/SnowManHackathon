@@ -4,14 +4,11 @@
 
 header {
     text-align: center;
-    /* color: #333; */
     font-weight: 100;
     font-size: 50px;
-    /* text-decoration: underline dotted; */
     border-bottom: dotted 10px #333;
     margin: 20px auto 30px auto;
     padding-bottom: 20px;
-    /* margin-bottom: 30px; */
 }
 
 header span:nth-of-type(odd) {
@@ -58,17 +55,12 @@ svg {
     margin: auto 50px;
     border: solid 3px #333;
     border-radius: 9px;
-    /* visibility: hidden; */
 }
-
-/* #Ellipse_1, #Ellipse_3, #Ellipse_2, #Group_2, #Group_4, #Ellipse_11, #Ellipse_13, #Ellipse_12, #Ellipse_4, #Ellipse_5, #Group_5, #Polygon_1, #Path_1, #Group_6 {
-    visibility: hidden;
-} */
 
 #wordDiv {
     font-size: 60px;
     font-weight: 100;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 input {
@@ -118,6 +110,4 @@ form {
 #lose-count {
     color: tomato;
     border: solid 2px tomato;
-    /* border-radius: 8px; */
-    /* padding: 8px; */
 }

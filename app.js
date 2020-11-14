@@ -52,7 +52,6 @@ const resetGame = () => {
         document.querySelector('#lose-count').innerHTML += `${loseCount}`
         buildPage()
     }
-    // console.log(confirm)
 }
 
 
@@ -108,18 +107,12 @@ const checkGuess = (guess) => {
 
 const checkForEnd = () => {
     wrongGuesses = document.getElementById('wrong').textContent.split(" ").join("")
-    // console.log('wrongGuesses in checkForEnd', wrongGuesses)
     wrongGuessRegex = new RegExp(`[${wrongGuesses}]`);
-    // console.log('wrongGuessRegex in checkForEnd', wrongGuessRegex)
     
     correctGuesses = answerArray.join()
-    console.log('correctGuesses in checkForEnd', correctGuesses)
     correctGuessRegex = new RegExp(`[${correctGuesses}]`);
-    console.log('correctGuessRegex in checkForEnd', correctGuessRegex)
 
     if(answerArray.join() === word.join()){
-        // const wordDiv = document.querySelector('#wordDiv')
-        // wordDiv.appendChild(document.createTextNode(`You win! The correct answer was${word.join('')}`))
         document.querySelector('#user-guess').readOnly = true
         setTimeout(()=>{
             alert(`You win! The answer was "${word.join('')}"`)
@@ -127,8 +120,6 @@ const checkForEnd = () => {
         })
         winCount++
         document.querySelector('#win-count').innerHTML += `${winCount}`
-        // startGame()
-        // return true
     } else if (guessCount === 12) {
         document.querySelector('#user-guess').readOnly = true
         setTimeout(()=>{
@@ -137,19 +128,15 @@ const checkForEnd = () => {
         }, 500)
         loseCount++
         document.querySelector('#lose-count').innerHTML += `${loseCount}`
-        // startGame()
-        // return true
     }
 }
 
-const snowMan = (guess) => {
+const snowPerson = (guess) => {
     guess = document.querySelector('#user-guess').value.toLowerCase()
     checkGuess(guess)
     document.querySelector('#guess-count').innerHTML = `${12 - guessCount}`
     const wordDiv = document.querySelector('#wordDiv')
     wordDiv.innerHTML = ''
     wordDiv.appendChild(document.createTextNode(`${answerArray.join(' ')}`))
-    // console.log(word.join(''))
-    // console.log(answerArray.join(''))
     checkForEnd()
 }
