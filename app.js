@@ -118,6 +118,8 @@ const checkForEnd = () => {
             alert(`You win! The answer was "${word.join('')}"`)
             buildPage()
         })
+        wrongGuessRegex = />/
+        correctGuessRegex = />/
         winCount++
         // document.querySelector('#win-ticker').innerHTML = ` `
         document.querySelector('#win-ticker').innerHTML = `${winCount}`
@@ -127,6 +129,8 @@ const checkForEnd = () => {
             alert(`You lose! The answer was "${word.join('')}"`)
             buildPage()
         }, 500)
+        wrongGuessRegex = />/
+        correctGuessRegex = />/
         loseCount++
         document.querySelector('#lose-ticker').innerHTML = `${loseCount}`
     }
