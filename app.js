@@ -1,5 +1,5 @@
 let word, remainingBlankLetters, guessCount, wrongGuesses, correctGuesses, winCount = 0, loseCount = 0, answerArray = [];
-const xmasString = "On the first second third fourth fifth sixth seventh eighth ninth tenth eleventh twelfth day of Christmas my true love sent to me: Twelve Drummers Drumming, Eleven Pipers Piping, Ten Lords a Leaping, Nine Ladies Dancing, Eight Maids a Milking, Seven Swans a Swimming, Six Geese a Laying, Seven Golden Rings, Four Calling Birds, Three French Hens, Two Turtle Doves, and a Partridge in a Pear Tree!"
+const xmasString = "On the first second third fourth fifth sixth seventh eighth ninth tenth eleventh twelfth day of Christmas my true love sent to me: Twelve Drummers Drumming, Eleven Pipers Piping, Ten Lords a Leaping, Nine Ladies Dancing, Eight Maids a Milking, Seven Swans a Swimming, Six Geese a Laying, Five Golden Rings, Four Calling Birds, Three French Hens, Two Turtle Doves, and a Partridge in a Pear Tree!"
 
 let wrongGuessRegex = />/
 let correctGuessRegex = />/
