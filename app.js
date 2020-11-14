@@ -49,7 +49,7 @@ buildPage()
 const resetGame = () => {
     if (confirm("Are you sure? Resetting the game will count as a loss")){
         loseCount++
-        document.querySelector('#lose-count').innerHTML += `${loseCount}`
+        document.querySelector('#lose-ticker').innerHTML = `${loseCount}`
         buildPage()
     }
 }
@@ -119,7 +119,8 @@ const checkForEnd = () => {
             buildPage()
         })
         winCount++
-        document.querySelector('#win-count').innerHTML += `${winCount}`
+        // document.querySelector('#win-ticker').innerHTML = ` `
+        document.querySelector('#win-ticker').innerHTML = `${winCount}`
     } else if (guessCount === 12) {
         document.querySelector('#user-guess').readOnly = true
         setTimeout(()=>{
@@ -127,7 +128,7 @@ const checkForEnd = () => {
             buildPage()
         }, 500)
         loseCount++
-        document.querySelector('#lose-count').innerHTML += `${loseCount}`
+        document.querySelector('#lose-ticker').innerHTML = `${loseCount}`
     }
 }
 
