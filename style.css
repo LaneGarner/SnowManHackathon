@@ -2,6 +2,10 @@
     font-family: sans-serif;
 }
 
+body {
+    height: 100vh;
+}
+
 header {
     text-align: center;
     font-weight: 100;
